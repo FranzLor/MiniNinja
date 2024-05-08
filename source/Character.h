@@ -30,7 +30,7 @@ private:
 	const float updateTime;
 
 	//player texture looks down first
-	PlayerDirection direction;
+	PlayerDirection playerDirection;
 	bool isMoving;
 
 public:
