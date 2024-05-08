@@ -62,25 +62,25 @@ int main(void) {
 		//UPDATE
 		//WASD movement
 		isMoving = false;
-		if (IsKeyDown(KEY_W)) {
+		if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)) {
 			movementDirection.y -= 1.0f;
 			playerDirection = UP;
 			isMoving = true;
 
 		}
-		if (IsKeyDown(KEY_D)) {
+		if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) {
 			movementDirection.x += 1.0f;
 			playerDirection = RIGHT;
 			isMoving = true;
 
 		}
-		if (IsKeyDown(KEY_S)) {
+		if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN)) {
 			movementDirection.y += 1.0f;
 			playerDirection = DOWN;
 			isMoving = true;
 
 		}
-		if (IsKeyDown(KEY_A)) {
+		if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT)) {
 			movementDirection.x -= 1.0f;
 			playerDirection = LEFT;
 			isMoving = true;
