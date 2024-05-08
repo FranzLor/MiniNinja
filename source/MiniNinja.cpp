@@ -38,6 +38,15 @@ int main(void) {
 		//map
 		DrawTextureEx(map, mapPosition, 0.0f, mapScale, WHITE);
 
+		//map boundary
+		if (ninja.GetWorldPos().x < 0.0f ||
+			ninja.GetWorldPos().y < 0.0f ||
+			ninja.GetWorldPos().x + windowWidth > map.width * mapScale ||
+			ninja.GetWorldPos().y + windowHeight > map.height * mapScale) {
+
+			ninja.StopMovement();
+		}
+
 		ninja.HandleInput(GetFrameTime());
 
 		EndDrawing();
