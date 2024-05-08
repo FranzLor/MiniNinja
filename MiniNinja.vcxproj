@@ -129,7 +129,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\Character.cpp" />
     <ClCompile Include="source\MiniNinja.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\Character.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
