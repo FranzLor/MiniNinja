@@ -36,11 +36,10 @@ int main(void) {
 	int frameWidth = ninja.width / 4;
 	int frameHeight = ninja.height / 7;
 
-	float updateTime = (1.0f / 10.0f);
+	float updateTime = 1.0f / 10.0f;
 	float runningTime = 0.0f;
 	int frame = 0;
 	int maxFrames = 4;
-	float deltaTime = GetFrameTime();
 
 	bool isMoving = false;
 	PlayerDirection playerDirection = DOWN;
@@ -64,25 +63,26 @@ int main(void) {
 		//WASD movement
 		if (IsKeyDown(KEY_W)) {
 			movementDirection.y -= 1.0f;
-			isMoving = true;
 			playerDirection = UP;
+			isMoving = true;
+
 		}
 		if (IsKeyDown(KEY_D)) {
 			movementDirection.x += 1.0f;
-			isMoving = true;
 			playerDirection = RIGHT;
+			isMoving = true;
 
 		}
 		if (IsKeyDown(KEY_S)) {
 			movementDirection.y += 1.0f;
-			isMoving = true;
 			playerDirection = DOWN;
+			isMoving = true;
 
 		}
 		if (IsKeyDown(KEY_A)) {
 			movementDirection.x -= 1.0f;
-			isMoving = true;
 			playerDirection = LEFT;
+			isMoving = true;
 
 		}
 
@@ -90,9 +90,16 @@ int main(void) {
 			mapPosition = Vector2Subtract(mapPosition, Vector2Scale(Vector2Normalize(movementDirection), speed));
 		}
 
+		//RENDER
+		//map
+		const float mapScale = 4.0f;
+		DrawTextureEx(map, mapPosition, 0.0f, mapScale, WHITE);
+
+
+		//ninja
 		//moving anim
 		if (isMoving) {
-			runningTime += deltaTime;
+			runningTime += GetFrameTime();
 			if (runningTime >= updateTime) {
 				frame = (frame + 1) % maxFrames;
 				runningTime = 0.0f;
@@ -103,12 +110,6 @@ int main(void) {
 			frame = 0;
 		}
 
-		//RENDER
-		//map
-		const float mapScale = 4.0f;
-		DrawTextureEx(map, mapPosition, 0.0f, mapScale, WHITE);
-
-		//ninja
 		Rectangle playerSrc = {
 			static_cast<float>((playerDirection - 1) * frameWidth),
 			static_cast<float>(frame * frameHeight),
@@ -129,6 +130,7 @@ int main(void) {
 
 	//CLEANUP
 	UnloadImage(MiniNinjaIcon);
+	UnloadTexture(ninja);
 	CloseWindow();
 
 	return 0;
