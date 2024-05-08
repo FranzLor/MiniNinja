@@ -5,7 +5,8 @@
 
 
 Character::Character(int windowWidth, int windowHeight)
-	: screenPosition({0.0f, 0.0f}),
+	: texture(LoadTexture("assets/ninja_sprite.png")),
+	screenPosition({0.0f, 0.0f}),
 	worldPosition({0.0f, 0.0f}),
 	worldLastPosFrame({0.0f, 0.0f}),
 	speed(5.0f),
