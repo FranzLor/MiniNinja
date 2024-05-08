@@ -31,6 +31,7 @@ Character::~Character() {
 
 
 void Character::HandleInput(float deltaTime) {
+	worldLastPosFrame = worldPosition;
 	Vector2 movementDirection = { 0.0f, 0.0f };
 	isMoving = false;
 
@@ -98,8 +99,5 @@ void Character::HandleInput(float deltaTime) {
 
 
 void Character::StopMovement() {
-	
+	worldPosition = worldLastPosFrame;
 }
-
-
-
