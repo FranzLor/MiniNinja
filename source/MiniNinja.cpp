@@ -61,6 +61,7 @@ int main(void) {
 
 		//UPDATE
 		//WASD movement
+		isMoving = false;
 		if (IsKeyDown(KEY_W)) {
 			movementDirection.y -= 1.0f;
 			playerDirection = UP;
