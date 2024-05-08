@@ -13,5 +13,5 @@ public:
 	Prop(Vector2 propPos, Texture2D propTex);
 	~Prop();
 
+	void Render(Vector2 position);
 };
-

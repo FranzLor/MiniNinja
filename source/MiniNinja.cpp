@@ -3,7 +3,7 @@
 #include <raymath.h>
 
 #include "Character.h"
-
+#include "Prop.h"
 
 int main(void) {
 	//INIT
@@ -21,7 +21,13 @@ int main(void) {
 	Texture2D map = LoadTexture("assets/map_v2.png");
 	Vector2 mapPosition = { 0.0f, 0.0f };
 
+
+	//player
 	Character ninja(windowWidth, windowHeight);
+
+	//prop
+	Texture2D rockTex = LoadTexture("assets/Rock.png");
+	Prop rock(Vector2{ 0.0f, 0.0f }, rockTex);
 
 	SetTargetFPS(60);
 	//MAIN LOOP
@@ -47,6 +53,9 @@ int main(void) {
 			ninja.StopMovement();
 		}
 
+		//prop
+		rock.Render(ninja.GetWorldPos());
+
 		ninja.HandleInput(GetFrameTime());
 
 		EndDrawing();
@@ -54,6 +63,7 @@ int main(void) {
 
 	//CLEANUP
 	UnloadImage(MiniNinjaIcon);
+	UnloadTexture(rockTex);
 	CloseWindow();
 
 	return 0;
