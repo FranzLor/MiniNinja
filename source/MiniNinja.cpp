@@ -10,6 +10,10 @@ int main(void) {
 	//window
 	InitWindow(windowWidth, windowHeight, "Mini Ninja");
 
+	//icon
+	Image MiniNinjaIcon = LoadImage("assets/MiniNinjaIcon.png");
+	SetWindowIcon(MiniNinjaIcon);
+
 	SetTargetFPS(60);
 
 	//MAIN LOOP
@@ -23,6 +27,7 @@ int main(void) {
 	}
 
 	//CLEANUP
+	UnloadImage(MiniNinjaIcon);
 	CloseWindow();
 
 	return 0;
