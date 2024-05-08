@@ -3,6 +3,13 @@
 #include <raymath.h>
 
 
+enum PlayerDirection {
+	//directions based on ninja tile set column
+	RIGHT = 0,
+	DOWN = 1,
+	UP = 2,
+	LEFT = 3
+};
 
 int main(void) {
 	//INIT
@@ -29,6 +36,13 @@ int main(void) {
 	int frameWidth = ninja.width / 4;
 	int frameHeight = ninja.height / 7;
 
+	float updateTime = 1.0f / 10.0f;
+	float runningTime = 0.0f;
+	int frame = 0;
+	int maxFrames = 4;
+
+	bool isMoving = false;
+	PlayerDirection playerDirection = DOWN;
 
 	Vector2 ninjaPos = {
 		static_cast<float>((windowWidth) - frameWidth * scale) / 2,
@@ -43,28 +57,38 @@ int main(void) {
 		BeginDrawing();
 		ClearBackground(BLACK);
 
-		Vector2 direction = { 0.0f, 0.0f };
+		Vector2 movementDirection = { 0.0f, 0.0f };
 
 		//UPDATE
 		//WASD movement
-		if (IsKeyDown(KEY_W)) {
-			direction.y -= 1.0f;
-		}
-		if (IsKeyDown(KEY_D)) {
-			direction.x += 1.0f;
+		isMoving = false;
+		if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)) {
+			movementDirection.y -= 1.0f;
+			playerDirection = UP;
+			isMoving = true;
 
 		}
-		if (IsKeyDown(KEY_S)) {
-			direction.y += 1.0f;
+		if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) {
+			movementDirection.x += 1.0f;
+			playerDirection = RIGHT;
+			isMoving = true;
 
 		}
-		if (IsKeyDown(KEY_A)) {
-			direction.x -= 1.0f;
+		if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN)) {
+			movementDirection.y += 1.0f;
+			playerDirection = DOWN;
+			isMoving = true;
+
+		}
+		if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT)) {
+			movementDirection.x -= 1.0f;
+			playerDirection = LEFT;
+			isMoving = true;
 
 		}
 
-		if (Vector2Length(direction) != 0.0f) {
-			mapPosition = Vector2Subtract(mapPosition, Vector2Scale(Vector2Normalize(direction), speed));
+		if (Vector2Length(movementDirection) != 0.0f) {
+			mapPosition = Vector2Subtract(mapPosition, Vector2Scale(Vector2Normalize(movementDirection), speed));
 		}
 
 		//RENDER
@@ -72,12 +96,26 @@ int main(void) {
 		const float mapScale = 4.0f;
 		DrawTextureEx(map, mapPosition, 0.0f, mapScale, WHITE);
 
+
 		//ninja
+		//moving anim
+		if (isMoving) {
+			runningTime += GetFrameTime();
+			if (runningTime >= updateTime) {
+				frame = (frame + 1) % maxFrames;
+				runningTime = 0.0f;
+			}
+		}
+		//idle (no anim)
+		else {
+			frame = 0;
+		}
+
 		Rectangle playerSrc = {
-				0.0f,
-				0.0f,
-				static_cast<float>(frameWidth),
-				static_cast<float>(frameHeight)
+			static_cast<float>((playerDirection - 1) * frameWidth),
+			static_cast<float>(frame * frameHeight),
+			static_cast<float>(frameWidth),
+			static_cast<float>(frameHeight)
 		};
 		Rectangle playerDst = {
 			ninjaPos.x,
@@ -93,6 +131,7 @@ int main(void) {
 
 	//CLEANUP
 	UnloadImage(MiniNinjaIcon);
+	UnloadTexture(ninja);
 	CloseWindow();
 
 	return 0;
