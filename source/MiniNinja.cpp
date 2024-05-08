@@ -7,8 +7,8 @@
 
 int main(void) {
 	//INIT
-	constexpr int windowWidth = 390;
-	constexpr int windowHeight = 390;
+	constexpr int windowWidth = 400;
+	constexpr int windowHeight = 400;
 
 	//window
 	InitWindow(windowWidth, windowHeight, "Mini Ninja");
@@ -18,7 +18,7 @@ int main(void) {
 	SetWindowIcon(MiniNinjaIcon);
 
 	//map
-	Texture2D map = LoadTexture("assets/map.png");
+	Texture2D map = LoadTexture("assets/map_v2.png");
 	Vector2 mapPosition = { 0.0f, 0.0f };
 
 	Character ninja(windowWidth, windowHeight);
