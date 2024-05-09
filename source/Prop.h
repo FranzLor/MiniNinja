@@ -14,4 +14,6 @@ public:
 	~Prop();
 
 	void Render(Vector2 position);
+	Rectangle GetCollisionRec(Vector2 position) const;
+
 };

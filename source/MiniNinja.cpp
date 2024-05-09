@@ -27,7 +27,13 @@ int main(void) {
 
 	//prop
 	Texture2D rockTex = LoadTexture("assets/Rock.png");
-	Prop rock(Vector2{ 0.0f, 0.0f }, rockTex);
+	Texture2D logTex = LoadTexture("assets/Log.png");
+
+	//current size of props in map
+	Prop props[2]{
+		Prop {Vector2{ 600.0f, 300.0f }, rockTex},
+		Prop {Vector2{ 500.0f, 800.0f }, logTex}
+	};
 
 	SetTargetFPS(60);
 	//MAIN LOOP
@@ -53,8 +59,17 @@ int main(void) {
 			ninja.StopMovement();
 		}
 
-		//prop
-		rock.Render(ninja.GetWorldPos());
+		//collision check for props
+		for (auto& prop : props) {
+			if (CheckCollisionRecs(prop.GetCollisionRec(ninja.GetWorldPos()), ninja.GetCollisionRect())) {
+				ninja.StopMovement();
+			}
+		}
+
+		//render prop
+		for (auto& prop: props) {
+			prop.Render(ninja.GetWorldPos());
+		}
 
 		ninja.HandleInput(GetFrameTime());
 

@@ -41,6 +41,6 @@ public:
 
 	void HandleInput(float deltaTime);
 	void StopMovement();
-
+	Rectangle GetCollisionRect();
 };
 

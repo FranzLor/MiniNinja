@@ -21,3 +21,14 @@ void Prop::Render(Vector2 position) {
 
 	DrawTextureEx(texture, screenPosition, 0.0f, scale, WHITE);
 }
+
+Rectangle Prop::GetCollisionRec(Vector2 position) const {
+	Vector2 screenPosition = Vector2Subtract(worldPosition, position);
+
+	return Rectangle {
+		screenPosition.x,
+		screenPosition.y,
+		static_cast<float>(texture.width) * scale,
+		static_cast<float>(texture.height)* scale
+	};
+}

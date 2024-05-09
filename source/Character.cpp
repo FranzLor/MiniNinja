@@ -102,3 +102,14 @@ void Character::HandleInput(float deltaTime) {
 void Character::StopMovement() {
 	worldPosition = worldLastPosFrame;
 }
+
+
+
+Rectangle Character::GetCollisionRect() {
+	return Rectangle{
+		screenPosition.x,
+		screenPosition.y,
+		frameWidth * scale,
+		frameHeight * scale
+	};
+}
