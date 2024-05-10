@@ -13,7 +13,7 @@ enum PlayerDirection {
 
 class Character {
 private:
-	Texture2D texture = LoadTexture("assets/ninja_sprite.png");
+	Texture2D texture;
 	Vector2 screenPosition;
 	Vector2 worldPosition;
 	Vector2 worldLastPosFrame;
@@ -41,6 +41,6 @@ public:
 
 	void HandleInput(float deltaTime);
 	void StopMovement();
-
+	Rectangle GetCollisionRect();
 };
 

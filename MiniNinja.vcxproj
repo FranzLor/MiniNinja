@@ -129,10 +129,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\Prop.cpp" />
     <ClCompile Include="source\Character.cpp" />
     <ClCompile Include="source\MiniNinja.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\Prop.h" />
     <ClInclude Include="source\Character.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
