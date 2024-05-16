@@ -3,31 +3,18 @@
 #include <raymath.h>
 
 
-Enemy::Enemy(Vector2 pos, Texture2D texture)
-	: texture(texture),
-	screenPosition({ 0.0f, 0.0f }),
-	worldPosition({ 0.0f, 0.0f }),
-	worldLastPosFrame({ 0.0f, 0.0f }),
-	speed(5.0f),
-	scale(4.0f),
-	runningTime(0.0f),
-	frame(0),
-	maxFrames(4),
-	updateTime(1.0f / 10.f),
-	width(0.0f),
-	height(0.0f),
-	enemyDirection(ENEMY_DOWN),
-	isMoving(false) {
+Enemy::Enemy(Vector2 pos, Texture2D texture) {
+
+	texture = LoadTexture("assets/enemy.png");
+
+	worldPosition = pos;
+	this->texture = texture;
+
 
 	width = texture.width / maxFrames;
 	height = texture.height;
+
 }
-
-
-Enemy::~Enemy() {
-	UnloadTexture(texture);
-}
-
 
 
 
@@ -56,7 +43,7 @@ void Enemy::HandleInput(float deltaTime) {
 
 	//texture rendering
 	Rectangle playerSrc = {
-		static_cast<float>((enemyDirection - 1) * frameWidth),
+		static_cast<float>((direction - 1) * frameWidth),
 		static_cast<float>(frame * frameHeight),
 		static_cast<float>(frameWidth),
 		static_cast<float>(frameHeight)
@@ -72,19 +59,3 @@ void Enemy::HandleInput(float deltaTime) {
 	DrawTexturePro(texture, playerSrc, playerDst, playerOrg, 0.0f, WHITE);
 }
 
-
-
-void Enemy::StopMovement() {
-	worldPosition = worldLastPosFrame;
-}
-
-
-
-Rectangle Enemy::GetCollisionRect() {
-	return Rectangle {
-		screenPosition.x,
-		screenPosition.y,
-		frameWidth * scale,
-		frameHeight * scale
-	};
-}

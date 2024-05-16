@@ -129,12 +129,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\BaseCharacter.cpp" />
     <ClCompile Include="source\Enemy.cpp" />
     <ClCompile Include="source\Prop.cpp" />
     <ClCompile Include="source\Character.cpp" />
     <ClCompile Include="source\MiniNinja.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\BaseCharacter.h" />
     <ClInclude Include="source\Enemy.h" />
     <ClInclude Include="source\Prop.h" />
     <ClInclude Include="source\Character.h" />

@@ -4,21 +4,7 @@
 #include <raymath.h>
 
 
-Character::Character(int windowWidth, int windowHeight)
-	: texture(LoadTexture("assets/ninja_sprite.png")),
-	screenPosition({0.0f, 0.0f}),
-	worldPosition({0.0f, 0.0f}),
-	worldLastPosFrame({0.0f, 0.0f}),
-	speed(5.0f),
-	scale(4.0f),
-	runningTime(0.0f),
-	frame(0),
-	maxFrames(4),
-	updateTime(1.0f / 10.f),
-	width(0.0f),
-	height(0.0f),
-	playerDirection(PLAYER_DOWN),
-	isMoving(false) {
+Character::Character(int windowWidth, int windowHeight) {
 
 	width = texture.width / maxFrames;
 	height = texture.height;
@@ -30,11 +16,6 @@ Character::Character(int windowWidth, int windowHeight)
 }
 
 
-Character::~Character() {
-	UnloadTexture(texture);
-}
-
-
 void Character::HandleInput(float deltaTime) {
 	worldLastPosFrame = worldPosition;
 	Vector2 movementDirection = { 0.0f, 0.0f };
@@ -43,25 +24,25 @@ void Character::HandleInput(float deltaTime) {
 	//player movement
 	if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)) {
 		movementDirection.y -= 1.0f;
-		playerDirection = PLAYER_UP;
+		direction = UP;
 		isMoving = true;
 
 	}
 	if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) {
 		movementDirection.x += 1.0f;
-		playerDirection = PLAYER_RIGHT;
+		direction = RIGHT;
 		isMoving = true;
 
 	}
 	if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN)) {
 		movementDirection.y += 1.0f;
-		playerDirection = PLAYER_DOWN;
+		direction = DOWN;
 		isMoving = true;
 
 	}
 	if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT)) {
 		movementDirection.x -= 1.0f;
-		playerDirection = PLAYER_LEFT;
+		direction = LEFT;
 		isMoving = true;
 
 	}
@@ -85,7 +66,7 @@ void Character::HandleInput(float deltaTime) {
 
 	//texture rendering
 	Rectangle playerSrc = {
-		static_cast<float>((playerDirection - 1) * frameWidth),
+		static_cast<float>((direction - 1) * frameWidth),
 		static_cast<float>(frame * frameHeight),
 		static_cast<float>(frameWidth),
 		static_cast<float>(frameHeight)
@@ -99,21 +80,4 @@ void Character::HandleInput(float deltaTime) {
 	Vector2 playerOrg = { 0.0f, 0.0f };
 
 	DrawTexturePro(texture, playerSrc, playerDst, playerOrg, 0.0f, WHITE);
-}
-
-
-
-void Character::StopMovement() {
-	worldPosition = worldLastPosFrame;
-}
-
-
-
-Rectangle Character::GetCollisionRect() {
-	return Rectangle {
-		screenPosition.x,
-		screenPosition.y,
-		frameWidth * scale,
-		frameHeight * scale
-	};
 }

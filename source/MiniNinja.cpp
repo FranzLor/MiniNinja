@@ -24,6 +24,7 @@ int main(void) {
 
 
 	//player
+	Texture2D ninjaTexture = LoadTexture("assets/ninja_sprite.png");
 	Character ninja(windowWidth, windowHeight);
 
 	//enemy
