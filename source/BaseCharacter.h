@@ -17,6 +17,7 @@ protected:
 	Vector2 screenPosition;
 	Vector2 worldPosition;
 	Vector2 worldLastPosFrame;
+	Vector2 movementDirection;
 
 	//attributes
 	float speed;
@@ -45,6 +46,8 @@ public:
 
 	void StopMovement();
 	Rectangle GetCollisionRect();
+
+	virtual void Movement(float deltaTime);
 
 };
 

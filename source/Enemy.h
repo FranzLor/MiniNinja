@@ -11,7 +11,7 @@ public:
 	Enemy(Vector2 pos, Texture2D texture);
 	~Enemy() = default;
 
-	void HandleInput(float deltaTime);
+	virtual void Movement(float deltaTime) override;
 
 };
 

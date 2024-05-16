@@ -13,7 +13,7 @@ public:
 	Character(int windowWidth, int windowHeight);
 	~Character() = default;
 
-	void HandleInput(float deltaTime);
+	virtual void Movement(float deltaTime) override;
 
 };
 

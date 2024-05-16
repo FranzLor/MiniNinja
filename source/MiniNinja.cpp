@@ -78,9 +78,9 @@ int main(void) {
 			prop.Render(ninja.GetWorldPos());
 		}
 
-		ninja.HandleInput(GetFrameTime());
+		ninja.Movement(GetFrameTime());
 
-		samurai.HandleInput(GetFrameTime());
+		samurai.Movement(GetFrameTime());
 
 		EndDrawing();
 	}
