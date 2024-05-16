@@ -4,10 +4,10 @@
 
 enum PlayerDirection {
 	//directions based on ninja tile set columns
-	RIGHT = 0,
-	DOWN = 1,
-	UP = 2,
-	LEFT = 3
+	PLAYER_RIGHT = 0,
+	PLAYER_DOWN = 1,
+	PLAYER_UP = 2,
+	PLAYER_LEFT = 3
 };
 
 
@@ -21,6 +21,7 @@ private:
 	//attributes
 	float speed;
 	float scale;
+	
 	//animation
 	int frameWidth = texture.width / 4;
 	int frameHeight = texture.height / 7;
@@ -28,6 +29,9 @@ private:
 	int frame;
 	const int maxFrames;
 	const float updateTime;
+
+	float width;
+	float height;
 
 	//player texture looks down first
 	PlayerDirection playerDirection;

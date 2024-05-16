@@ -15,9 +15,13 @@ Character::Character(int windowWidth, int windowHeight)
 	frame(0),
 	maxFrames(4),
 	updateTime(1.0f / 10.f),
-	playerDirection(DOWN),
+	width(0.0f),
+	height(0.0f),
+	playerDirection(PLAYER_DOWN),
 	isMoving(false) {
 
+	width = texture.width / maxFrames;
+	height = texture.height;
 
 	screenPosition = {
 		(windowWidth - frameWidth * scale) / 2,
@@ -39,25 +43,25 @@ void Character::HandleInput(float deltaTime) {
 	//player movement
 	if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP)) {
 		movementDirection.y -= 1.0f;
-		playerDirection = UP;
+		playerDirection = PLAYER_UP;
 		isMoving = true;
 
 	}
 	if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) {
 		movementDirection.x += 1.0f;
-		playerDirection = RIGHT;
+		playerDirection = PLAYER_RIGHT;
 		isMoving = true;
 
 	}
 	if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN)) {
 		movementDirection.y += 1.0f;
-		playerDirection = DOWN;
+		playerDirection = PLAYER_DOWN;
 		isMoving = true;
 
 	}
 	if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT)) {
 		movementDirection.x -= 1.0f;
-		playerDirection = LEFT;
+		playerDirection = PLAYER_LEFT;
 		isMoving = true;
 
 	}
@@ -106,7 +110,7 @@ void Character::StopMovement() {
 
 
 Rectangle Character::GetCollisionRect() {
-	return Rectangle{
+	return Rectangle {
 		screenPosition.x,
 		screenPosition.y,
 		frameWidth * scale,

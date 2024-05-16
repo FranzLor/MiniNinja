@@ -4,6 +4,7 @@
 
 #include "Character.h"
 #include "Prop.h"
+#include "Enemy.h"
 
 int main(void) {
 	//INIT
@@ -24,6 +25,11 @@ int main(void) {
 
 	//player
 	Character ninja(windowWidth, windowHeight);
+
+	//enemy
+	Texture2D samuraiTexture = LoadTexture("assets/enemy.png");
+	Vector2 samuraiPos = { 0.0f, 0.0f };
+	Enemy samurai(samuraiPos, samuraiTexture);
 
 	//prop
 	Texture2D rockTex = LoadTexture("assets/Rock.png");
@@ -72,6 +78,8 @@ int main(void) {
 		}
 
 		ninja.HandleInput(GetFrameTime());
+
+		samurai.HandleInput(GetFrameTime());
 
 		EndDrawing();
 	}
