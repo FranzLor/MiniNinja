@@ -31,6 +31,7 @@ int main(void) {
 	Texture2D samuraiTexture = LoadTexture("assets/enemy.png");
 	Vector2 samuraiPos = { 0.0f, 0.0f };
 	Enemy samurai(samuraiPos, samuraiTexture);
+	samurai.setTarget(&ninja);
 
 	//prop
 	Texture2D rockTex = LoadTexture("assets/Rock.png");

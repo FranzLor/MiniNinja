@@ -10,7 +10,6 @@ Enemy::Enemy(Vector2 pos, Texture2D texture) {
 	worldPosition = pos;
 	this->texture = texture;
 
-
 	width = texture.width / maxFrames;
 	height = texture.height;
 
@@ -19,7 +18,10 @@ Enemy::Enemy(Vector2 pos, Texture2D texture) {
 
 
 void Enemy::Movement(float deltaTime) {
-
+	screenPosition = Vector2Subtract(worldPosition, target->GetWorldPos());
 	BaseCharacter::Movement(deltaTime);
 }
 
+void Enemy::setTarget(Character* character) {
+	target = character;
+}
