@@ -13,6 +13,7 @@ public:
 	Character(int windowWidth, int windowHeight);
 	~Character() = default;
 
+	Vector2 GetScreenPos() { return screenPosition; }
 	virtual void Movement(float deltaTime) override;
 
 };
