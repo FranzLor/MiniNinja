@@ -81,6 +81,7 @@ int main(void) {
 
 		ninja.Movement(GetFrameTime());
 
+		//TODO TESTING
 		samurai.Movement(GetFrameTime());
 
 		EndDrawing();
