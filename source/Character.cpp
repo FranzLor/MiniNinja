@@ -17,7 +17,11 @@ Character::Character(int windowWidth, int windowHeight) {
 
 
 void Character::Movement(float deltaTime) {
+	//update position and animation
 	BaseCharacter::Movement(deltaTime);
+	if (!GetAlive()) {
+		return;
+	}
 
 	movementDirection = { 0.0f, 0.0f };
 	isMoving = false;
@@ -47,4 +51,11 @@ void Character::Movement(float deltaTime) {
 		isMoving = true;
 
 	}
+
+	//handle attacking
+	if (IsKeyPressed(KEY_SPACE)) {
+		Attack();
+	}
+
+
 }

@@ -21,6 +21,10 @@ Enemy::Enemy(Vector2 pos, Texture2D texture)
 
 
 void Enemy::Movement(float deltaTime) {
+	if (!GetAlive()) {
+		return;
+	}
+
 	//store current pos to compare later
 	worldLastPosFrame = worldPosition;
 
@@ -83,6 +87,10 @@ void Enemy::Movement(float deltaTime) {
 	Vector2 characterOrg = { 0.0f, 0.0f };
 
 	DrawTexturePro(texture, characterSrc, characterDst, characterOrg, 0.0f, WHITE);
+
+
+	//attacking
+	IsMouseButtonDown(MOUSE_LEFT_BUTTON);
 }
 
 void Enemy::setTarget(Character* character) {

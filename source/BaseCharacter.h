@@ -8,12 +8,22 @@ enum Direction {
 	RIGHT = 0,
 	DOWN = 1,
 	UP = 2,
-	LEFT = 3
+	LEFT = 3,
+	ATTACK = 4
 };
 
 class BaseCharacter {
+private:
+	bool isAlive;
+
+	bool isAttacking;
+	float attackTime;
+	const float maxAttackTime;
+
 protected:
 	Texture2D texture;
+	Texture2D attackTexture;
+
 	Vector2 screenPosition;
 	Vector2 worldPosition;
 	Vector2 worldLastPosFrame;
@@ -29,7 +39,7 @@ protected:
 	float runningTime;
 	int frame;
 	const int maxFrames;
-	const float updateTime;
+	float updateTime;
 
 	float width;
 	float height;
@@ -37,6 +47,9 @@ protected:
 	//player texture looks down first
 	Direction direction;
 	bool isMoving;
+
+	void UpdateAnimation(float deltaTime);
+
 
 public:
 	BaseCharacter();
@@ -49,5 +62,8 @@ public:
 
 	virtual void Movement(float deltaTime);
 
+	inline bool GetAlive() const { return isAlive; }
+	inline bool SetAlive(bool alive) { alive = isAlive; }
+	void Attack();
 };
 
