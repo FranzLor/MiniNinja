@@ -28,6 +28,11 @@ BaseCharacter::BaseCharacter()
 }
 
 void BaseCharacter::Attack() {
+    //make sure alive first
+    if (!GetAlive()) {
+        return;
+    }
+
 	isAttacking = true;
 	attackTime = 0.0f;
 	//reset frame 
@@ -36,6 +41,11 @@ void BaseCharacter::Attack() {
 
 
 void BaseCharacter::UpdateAnimation(float deltaTime) {
+    //check if alive
+    if (!GetAlive()) {
+        return;
+    }
+
     runningTime += deltaTime;
 
     //animation row offset
